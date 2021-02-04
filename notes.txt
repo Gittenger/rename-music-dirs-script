@@ -78,5 +78,7 @@ We will still have to scan over the files but in 99% of cases this should be suf
 
 Any other additions may be fairly unpredictable therefore this won't work for every single use case. But for most, this should be sufficient to format the title.
 
-
+Need to also consider "CD1, CD2, etc"
+as well as..
+The match could happen from either direction.
 
