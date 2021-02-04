@@ -1,0 +1,82 @@
+This problem has several different aspects
+One, need to check if year exists in filename.
+Year will typically be in one of the following formats:
+(1999)
+[1997]
+Album name - Year - Artist
+Album-name-year-artist
+
+I believe underscores are fairly rare.
+The initial regex I made is sufficient to find these, however, it needs more to be able to fully format automatically.
+
+Sometimes the year will come before the artist/album,
+sometimes it will come after.
+
+
+Step One:
+Memoize and save the information about the working directory.
+Will need the absolute path. 
+Will also want the path of the parent directory, as this will contain artist name as its basename.
+
+Ideas....
+.........
+infoObject = {
+   album-dirname: absolute_dirpath_of_album,
+   artist-dirname: parent_dir_artist_dir
+         These are in format "Dimmu Borgir" etc,
+         Title cased, with spaces
+   album-str: basename_of_album_dir
+      (what the regex will match against)
+}
+
+Step Two: Check for year match.....
+........
+Use regex to check for match.
+Add to infoObject the boolean...matchesYear?
+If no match, it's false, and we assume there is no year in the name.
+Then, check for artist in the name.
+
+If true, save the value of year. Then save updated version of the filename, now with the year bit removed. This will be part of the returned array from the match function.
+Then check for artist.
+
+Step Three: Checking for artist.
+............
+Save artist folder name in obj as lower case. Split and join with a separator such as dashes.
+Then, save a lower case, kebob case version of the full filename as well. If one can be matched against the other, return the match and save an updated version of the title,
+with this matching bit removed. 
+
+Step Four: Finding the rest of the filename.
+...........
+This step should be fairly easy. Really there isn't anything left to do with the string. The artist and year should be removed.
+Now, anything left can be assumed to be the album name in most cases. We will be of course removing all separators.
+All words should be in lower, kebob case. 
+
+This way, we can employ a title case function to rewrite the remainder how we want.
+
+A title case function might look something like this...
+
+if(word="to|in|of|and|the|a") str[0] = lowercase
+else str[0] = uppercase
+join(' ')
+resultString[0] = uppercase
+
+Then we can format the result filename however we want.
+ie: [year] | Album Title
+[year] Name of the Album
+
+
+OTHER CONSIDERATIONS....
+......
+Sometimes, the filename might have something appended to the end like "www.some-music-blog.com"
+
+In this case, currently, our algorithm can't detect this.
+Perhaps near the beginning we can implement a test.
+regex='(www\..*\.com)'
+If this matches, we can remove that whole capture group.
+This should eliminate most of these occurances.
+We will still have to scan over the files but in 99% of cases this should be sufficient.
+
+Any other additions may be fairly unpredictable therefore this won't work for every single use case. But for most, this should be sufficient to format the title.
+
+
+
