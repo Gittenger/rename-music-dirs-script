@@ -50,7 +50,6 @@ resultStr = resultStr
 	.join(' ')
 
 resultStr = resultStr.charAt(0).toUpperCase() + resultStr.slice(1)
-console.log(resultStr)
 
 let final = ''
 if (year) {
