@@ -2,8 +2,7 @@ const path = require('path')
 const fs = require('fs')
 
 // path variables for use below
-// const albumStr = process.argv[2]
-const albumStr = 'satyricon -this-_-is-the Album name-2005'
+const albumStr = process.argv[2]
 const albumAbs = path.resolve(albumStr)
 const artistAbs = path.resolve(albumAbs, '..')
 const artistStr = path.basename(artistAbs).toLowerCase()
